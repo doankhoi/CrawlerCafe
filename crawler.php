@@ -3,10 +3,10 @@
 <?php
 /*
  * Notes: Các link lấy tin có dạng
- * +/ Quán nổi nổi bật nhất:  http://www.quancafe.vn/Branch/MostFamous?start=2&total=6&pro=
- * +/ Quán mới tham gia: http://www.quancafe.vn/Branch/Newest?start=2&total=6&pro=
- * +/ Quán được yêu thích nhất: http://www.quancafe.vn/Branch/MostLike?start=2&total=6&pro=
- * +/ Quán được nhiều người review nhất: http://www.quancafe.vn/Branch/MostReview?start=2&total=6&pro=
+ * +/ Quán nổi nổi bật nhất:  http://www.quancafe.vn/Branch/MostFamous?start=2&total=6&pro= có 13 trang
+ * +/ Quán mới tham gia: http://www.quancafe.vn/Branch/Newest?start=2&total=6&pro= có 1779 trang
+ * +/ Quán được yêu thích nhất: http://www.quancafe.vn/Branch/MostLike?start=2&total=6&pro= có 1779 trang
+ * +/ Quán được nhiều người review nhất: http://www.quancafe.vn/Branch/MostReview?start=2&total=6&pro= có 1779 trang
  */
 
 include 'simple_html_dom.php';
@@ -107,6 +107,7 @@ function getIntroduction($url) {
     $place_link = URL_BASE . $url;
     $html = file_get_html($place_link);
     $intro = $html->find('div.overview', 0)->outertext;
+    return $intro;
 }
 
 /*
@@ -156,15 +157,6 @@ function saveEvents($url, $name_place) {
     }
 }
 
-/*
- * Hàm lưu thông tin của các dịch vụ mà quán cung cấp
- * input: 
- *      $url đường dẫn địa chỉ tới quán cần lấy thông tin dịch vụ
- *      $obj_id 
- */
-function saveServices($url, $obj_id){
-    
-}
 
 /*
  * Hàm lưu thông tin của địa diểm vào cơ sở dữ liệu
@@ -213,7 +205,7 @@ function savePlaces($url, $type) {
                 $intro = getIntroduction($uniqueName);
 
                 //Chèn vào database
-                insertPlace($name, "null", $latitude, $longtitude, $intro, $image, $district, $street, $national, $province, $houseno, $ward, 0, 0);
+                insertPlace($name, "null", $latitude, $longtiude, $intro, $image, $district, $street, $national, $province, $houseno, $ward, 0, 0);
                 //Lưu ảnh vào thư mục webroot
                 saveImagePlace($element->FrontImage, "C:/xampp/htdocs/CafeGarden/app/webroot/img/", $type);
 
@@ -222,7 +214,7 @@ function savePlaces($url, $type) {
                 saveEvents(URL_BASE . $uniqueName, $name);
                 
                 //Lấy thông tin các dịch vụ của quán.
-                saveServices(URL_BASE . $uniqueName, $name);
+//                saveServices(URL_BASE . $uniqueName, $name);
             }
         }
         break;

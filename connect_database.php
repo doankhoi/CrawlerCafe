@@ -69,7 +69,7 @@ function updateIntro($intro, $name){
  * Hàm lưu thông tin một sự kiện của quán và database
  */
 function insertEvent($title, $created, $description, $image, $place_id){
-    $sql = "insert into events(title, time, created, description, image, place_id)"
+    $sql = "insert into events(title, created, description, image, place_id)"
             . "values('$title','$created','$description','$image','$place_id')";
     $query = mysql_query($sql);
     if(mysql_affected_rows()==-1){
