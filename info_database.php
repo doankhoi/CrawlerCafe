@@ -6,6 +6,6 @@
 $SERVER = "localhost";
 $USERNAME = "root";
 $PASSWORD = "";
-$DB_NAME = "cafe";
+$DB_NAME = "cafevn";
 ?>
 
